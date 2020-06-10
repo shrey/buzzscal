@@ -9,7 +9,7 @@ const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
 
 router.post('/', async (req, res, next)=>{
 
-	if(req.isLoggedIn == undefined){
+	if(req.isSocietyLoggedIn == undefined){
 		MongoClient.connect(MONGO_URI, (error, client)=>{
 		
 			if(error){
@@ -25,7 +25,7 @@ router.post('/', async (req, res, next)=>{
 					} else {
 						var isValid = bcrypt.compareSync(passwd, user.passwd);
 						if(isValid){
-							req.session.isLoggedIn = true;
+							req.session.isSocietyLoggedIn = true;
 							req.session.name = society.name;
 							req.session._id = society._id.toString();
 							res.status(200).json({"msg" : "Logged In"});
