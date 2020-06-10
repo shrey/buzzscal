@@ -1,6 +1,7 @@
 var router = require('express').Router()
 var MongoClient = require('mongodb').MongoClient
 var ObjectId = require('mongodb').ObjectId
+var bcrypt = require('bcryptjs')
 
 //Mongo URI
 const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
@@ -9,8 +10,9 @@ router.post('/', async(req, res, next)=>{
 	
 	await MongoClient.connect(MONGO_URI, (error, client)=>{
 	
-		if(error)
+		if(error){
 			res.status(501).json({"msg" : "Cannot Connect to Database Server"});
+		}
 		else{
 			var user_db = client.db('buzzcal').collection('user')
 			var email = req.body.email;
@@ -20,33 +22,35 @@ router.post('/', async(req, res, next)=>{
 			var mobile = req.body.number;
 			var passwd = req.body.passwd;
 
-			await user_db.findOne({ email: email}, (err, user)=>{
+			user_db.findOne({ email: email}, (err, user)=>{
 				if(user != null){
 					res.status(501).json({"msg" : "Email Already Registered"});
 				}else{
-					await user_db.findOne({ username : username }, (err1, user_1)=>{
+					user_db.findOne({ username : username }, (err1, user_1)=>{
 						if(user_1 != null){
 							res.status(501).json({"msg" : "Username Alredy Used"});
 						}else{
+							var hashedPasswd = bcrypt.hashSync(passwd, 16);
 							var new_user = {
 								name : name,
 								email : email, 
-								passwd : passwd,
+								passwd : hashedPasswd,
 								image_url : image_url,
 								mobile : mobile,
 								number : number
 							};
 
-							await user_db.insertOne(new_user, (err2, user_2)=>{
+							user_db.insertOne(new_user, (err2, user_2)=>{
 								if(err2){
 									res.status(501).json({"msg" : "Internal Server Error \n Try Again Later"});
 								} else {
 									res.status(200).json({"msg" : "User Registered"});
 								}
 							});
+						}
 					});
 				}
-			})
+			});
 		}
 	});
 });
