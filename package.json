@@ -1,0 +1,30 @@
+{
+  "name": "buzzscal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrey/buzzscal.git"
+  },
+  "author": "Riyan & Shrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shrey/buzzscal/issues"
+  },
+  "homepage": "https://github.com/shrey/buzzscal#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.5.8",
+    "morgan": "^1.10.0"
+  }
+}
