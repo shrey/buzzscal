@@ -18,7 +18,7 @@ router.post('/', async(req, res, next)=>{
 			var email = req.body.email;
 			var name = req.body.name;
 			var username = req.body.username;
-			var image_url = req.body.image;
+			var logo_url = req.body.image;
 			var passwd = req.body.passwd;
 
 			society_db.findOne({ email: email}, (err, society)=>{
@@ -35,8 +35,9 @@ router.post('/', async(req, res, next)=>{
 								email : email, 
 								passwd : hashedPasswd,
 								image_url : image_url,
-								mobile : mobile,
-								number : number
+								members : new Array(),
+								public_event : new Array(),
+								private_event : new Array()
 							};
 
 							society_db.insertOne(new_user, (err2, user_2)=>{
