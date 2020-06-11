@@ -3,13 +3,13 @@ var MongoClient = require('mongodb').MongoClient
 var ObjectId = require('mongodb').ObjectId
 
 
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:8000'
+const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost'
 
 
 router.post('/', (req, res, next)=>{
 
 	MongoClient.connect(MONGO_URI, (error, client)=>{
-	
+
 		if(error){
 			res.status(501).json({"msg" : "Cannot Connect to Database Server"});
 		} else {
