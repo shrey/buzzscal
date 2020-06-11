@@ -9,7 +9,7 @@ const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
 
 router.post('/', async (req, res, next)=>{
 
-	if(req.isLoggedIn == undefined){
+	if(req.session.isLoggedIn == undefined){
 		MongoClient.connect(MONGO_URI, (error, client)=>{
 		
 			if(error){
@@ -28,7 +28,7 @@ router.post('/', async (req, res, next)=>{
 							req.session.isLoggedIn = true;
 							req.session.name = user.name;
 							req.session._id = user._id.toString();
-							res.status(200).json({"msg" : "Logged In"});
+							res.status(200).json(user);
 						} else {
 							res.status(501).json({"msg" : "Incorrect Password"});
 						}

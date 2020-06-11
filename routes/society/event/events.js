@@ -49,15 +49,33 @@ router.get('/', (req, res, next)=>{
 
 								for(let event of events){
 									ctr++;
-									for(let id of user.society){
-									
-										if(id.equals(event._id){
-											userEvents.push(event)
+																
+									var registed_index = user.registered_event.findIndex((ele)=>{
+										return (ele === event._id.toString())
+									});
+
+									var society_index = user.society.findIndex((ele)=>{
+										return (ele === event.society_id.toString())
+									});
+
+									if(registered_index > -1){
+										event.registered = true;
+										userEvents.push(event)
+
+									} else {
+
+										if(event.isPublic == true){
+											event.registerd = false;
+											userEvents.push(event);
+	
 										} else {
-											if(event.idPublic == true){
-												userEvents.push(event);		
+										
+											if(society_index > -1){
+												event.registered = false;
+												userEvents.push(event);
+
 											}
-										}
+										}	
 									}
 								}
 
