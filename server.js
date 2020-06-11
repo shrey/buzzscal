@@ -22,6 +22,8 @@ app.use(session({secret: 'EventRegister', resave: true, saveUninitialized: true}
 var registerRoute = require('./routes/authorisation/register')
 var loginRoute = require('./routes/authorisation/login')
 var loginSocietyRoute = require('./routes/authorisation/loginSociety')
+var registerSocietyRoute = require('./routes/authorisation/registerSociety')
+var eventCreateRoute = require('./routes/event/create_event')
 
 
 //Creating Routes
@@ -36,6 +38,8 @@ app.get('/*', (req, res, next)=>{
 app.use('/user/register', registerRoute);
 app.use('/user/login', loginRoute);
 app.use('/society/login', loginSocietyRoute);
+app.use('/society/register', registerSocietyRoute);
+app.use('/event/create', eventCreateRoute);
 
 
 //Start Server
