@@ -7,9 +7,9 @@ var bcrypt = require('bcryptjs')
 const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
 
 router.post('/', async(req, res, next)=>{
-	
+
 	await MongoClient.connect(MONGO_URI, (error, client)=>{
-	
+
 		if(error){
 			res.status(501).json({"msg" : "Cannot Connect to Database Server"});
 		}
@@ -17,7 +17,7 @@ router.post('/', async(req, res, next)=>{
 			var user_db = client.db('buzzcal').collection('user')
 			var email = req.body.email;
 			var name = req.body.name;
-			var usernam = req.body.username;
+			var username = req.body.username;
 			var image_url = req.body.image;
 			var mobile = req.body.number;
 			var passwd = req.body.passwd;
@@ -34,7 +34,7 @@ router.post('/', async(req, res, next)=>{
 							var hashedPasswd = bcrypt.hashSync(passwd, 16);
 							var new_user = {
 								name : name,
-								email : email, 
+								email : email,
 								passwd : hashedPasswd,
 								image_url : image_url,
 								mobile : mobile,
