@@ -1,7 +1,19 @@
 #!/bin/bash
 
+if test "$#" -lt 2
+then
+	echo "Usage: "
+	echo "./autowrite.sh <file_name> <method_type>"
+	exit 1
+fi
+
 file=$1
 method=$2
+
+if ! test -f $file
+then
+	touch $file
+fi
 
 echo "var router = require('express').Router()" > $file
 echo "var MongoClient = require('mongodb').MongoClient" >> $file
