@@ -14,21 +14,19 @@ router.post('/', async(req, res, next)=>{
 			res.status(501).json({"msg" : "Cannot Connect to Database Server"});
 		}
 		else{
-			var user_db = client.db('buzzcal').collection('user')
+			var society_db = client.db('buzzcal').collection('society')
 			var email = req.body.email;
 			var name = req.body.name;
 			var username = req.body.username;
-			var image_url = req.body.image;
-			var mobile = req.body.number;
+			var logo_url = req.body.image;
 			var passwd = req.body.passwd;
-			var enrollmentNumber = req.body.enrollmentNumber;
 
-			user_db.findOne({ email: email}, (err, user)=>{
-				if(user != null){
+			society_db.findOne({ email: email}, (err, society)=>{
+				if(society != null){
 					res.status(501).json({"msg" : "Email Already Registered"});
 				}else{
-					user_db.findOne({ username : username }, (err1, user_1)=>{
-						if(user_1 != null){
+					society_db.findOne({ username : username }, (err1, society_1)=>{
+						if(society_1 != null){
 							res.status(501).json({"msg" : "Username Alredy Used"});
 						}else{
 							var hashedPasswd = bcrypt.hashSync(passwd, 16);
@@ -37,12 +35,12 @@ router.post('/', async(req, res, next)=>{
 								email : email,
 								passwd : hashedPasswd,
 								image_url : image_url,
-								mobile : mobile,
-								number : number,
-								enrollmentNumber: enrollmentNumber
+								members : new Array(),
+								public_event : new Array(),
+								private_event : new Array()
 							};
 
-							user_db.insertOne(new_user, (err2, user_2)=>{
+							society_db.insertOne(new_user, (err2, user_2)=>{
 								if(err2){
 									res.status(501).json({"msg" : "Internal Server Error \n Try Again Later"});
 								} else {

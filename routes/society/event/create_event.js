@@ -21,7 +21,15 @@ router.post('/', (req, res, next)=>{
 				society : req.session.name,
 				society_id : req.session._id,
 				description : req.body.description,
-				registered : new Array()
+				registered_user : new Array(),
+				location : req.body.location,
+				isPublic : req.body.isPublic,
+				comment : new Array(),
+				date : new Date()
+			}
+
+			if(req.body.image_url != undefined){
+				new_event.image_url = req.body.image_url
 			}
 
 			event_db.insertOne(new_event, (err, event)=>{
