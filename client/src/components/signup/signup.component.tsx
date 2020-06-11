@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {StyledHeader } from '../login/login.styles'
 import {CustomTextField} from '../TextField/TextField.component'
+import {StyledButton} from '../login/login.styles'
 export const SignUpComponent: React.FC = () => {
     var [signUpDetails,setSignUpDetails] =
     useState({
@@ -69,6 +70,7 @@ export const SignUpComponent: React.FC = () => {
             value = {signUpDetails.password}
             handleChange={handleChange}
             />
+            <StyledButton>Sign Up</StyledButton>
         </div>
     )
 
