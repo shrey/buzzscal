@@ -19,11 +19,15 @@ app.use(session({secret: 'EventRegister', resave: true, saveUninitialized: true}
 
 
 //Importing Files
-var registerRoute = require('./routes/authorisation/register')
-var loginRoute = require('./routes/authorisation/login')
-var loginSocietyRoute = require('./routes/authorisation/loginSociety')
-var registerSocietyRoute = require('./routes/authorisation/registerSociety')
-var eventCreateRoute = require('./routes/event/create_event')
+var registerRoute = require('./routes/user/authorisation/register')
+var loginRoute = require('./routes/user/authorisation/login')
+var loginSocietyRoute = require('./routes/society/authorisation/loginSociety')
+var registerSocietyRoute = require('./routes/society/authorisation/registerSociety')
+var eventCreateRoute = require('./routes/society/event/create_event')
+var joinSocietyRoute = require('./routes/society/actions/join')
+var removeMemberRoute = require('./routes/society/actions/remove')
+var allSocietyRoute = require('./routes/society/profile/allSocieties')
+var getSocietyRoute = require('./routes/society/profile/profile')
 
 
 //Creating Routes
@@ -34,12 +38,33 @@ app.get('/*', (req, res, next)=>{
 });
 
 
+//User
+
 //Authorisation Routes
 app.use('/user/register', registerRoute);
 app.use('/user/login', loginRoute);
+
+
+//Society
+
+//Authorisation Routes
 app.use('/society/login', loginSocietyRoute);
 app.use('/society/register', registerSocietyRoute);
+
+
+//Profile Routes
+app.use('/society/', getSocietyRoute);
+app.use('/society/all', allSocietyRoute);
+
+
+//Actions Routes
+app.use('/society/join', joinSocietyRoute);
+app.use('/society/remove', removeMemberRoute);
+
+
+//Event Routes
 app.use('/event/create', eventCreateRoute);
+
 
 
 //Start Server
@@ -54,7 +79,7 @@ app.use(function(req, res, next) {
 });
 
 
-// error handler
+// error handle
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
