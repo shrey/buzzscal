@@ -4,14 +4,14 @@ var ObjectId = require('mongodb').ObjectId
 var bcrypt = require('bcryptjs')
 
 //Mongo URI
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
+const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost'
 
 
 router.post('/', async (req, res, next)=>{
 
 	if(req.isSocietyLoggedIn == undefined){
 		MongoClient.connect(MONGO_URI, (error, client)=>{
-		
+
 			if(error){
 				res.status(501).json({"msg" : "Cannot Connect to Database Server"});
 			} else {

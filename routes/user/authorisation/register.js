@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId
 var bcrypt = require('bcryptjs')
 
 //Mongo URI
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:5000'
+const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost'
 
 router.post('/', async(req, res, next)=>{
 
@@ -21,6 +21,7 @@ router.post('/', async(req, res, next)=>{
 			var image_url = req.body.image;
 			var mobile = req.body.number;
 			var passwd = req.body.passwd;
+			var enrollmentNumber = req.body.enrollmentNumber;
 			var description = req.body.description;
 
 			user_db.findOne({ email: email}, (err, user)=>{
@@ -39,6 +40,7 @@ router.post('/', async(req, res, next)=>{
 								image_url : image_url,
 								mobile : mobile,
 								number : number,
+								enrollmentNumber: enrollmentNumber,
 								society : new Array(),
 								description : description,
 								registered_event : new Array()
