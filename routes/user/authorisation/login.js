@@ -17,11 +17,11 @@ router.post('/', async (req, res, next)=>{
 		} else {
 			var user_db = client.db('buzzcal').collection('user')
 			var username = req.body.username
-			var password = req.body.passwd;
+			var passwd = req.body.passwd;
 
 			user_db.findOne({ username : username }, (err, user)=>{
 				if(user == null){
-					res.status(501).json({"msg" : "Incorrect Email "});
+					res.status(501).json({"msg" : "Incorrect Username "});
 				} else {
 					var isValid = bcrypt.compareSync(passwd, user.passwd);
 					if(isValid){

@@ -18,7 +18,7 @@ router.post('/', async(req, res, next)=>{
 			var email = req.body.email;
 			var name = req.body.name;
 			var username = req.body.username;
-			var image_url = req.body.image;
+			var image_url = req.body.image_url;
 			var mobile = req.body.number;
 			var passwd = req.body.passwd;
 			var enrollmentNumber = req.body.enrollmentNumber;
@@ -38,6 +38,7 @@ router.post('/', async(req, res, next)=>{
 								email : email,
 								passwd : hashedPasswd,
 								image_url : image_url,
+								username : username,
 								mobile : mobile,
 								enrollmentNumber: enrollmentNumber,
 								society : new Array(),

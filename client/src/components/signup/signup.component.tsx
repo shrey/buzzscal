@@ -35,7 +35,7 @@ export const SignUpComponent: React.FC = () => {
     return(
         <div>
             <StyledHeader>Sign Up</StyledHeader>
-            <form onSubmit = {handleSubmit} autoComplete = "off"></form>
+            <form onSubmit = {handleSubmit} autoComplete = "off">
             <CustomTextField
             label = "Name"
             required = {true}
@@ -90,6 +90,7 @@ export const SignUpComponent: React.FC = () => {
             handleChange={handleChange}
             />
             <StyledButton>Sign Up</StyledButton>
+	</form>
         </div>
     )
 
