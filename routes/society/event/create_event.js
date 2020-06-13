@@ -2,8 +2,8 @@ var router = require('express').Router()
 var MongoClient = require('mongodb').MongoClient
 var ObjectId = require('mongodb').ObjectId
 
-
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost'
+// Mongo URI
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost'
 
 
 router.post('/', (req, res, next)=>{

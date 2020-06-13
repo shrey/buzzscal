@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId
 var bcrypt = require('bcryptjs')
 
 //Mongo URI
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost'
 
 
 router.post('/', async (req, res, next)=>{

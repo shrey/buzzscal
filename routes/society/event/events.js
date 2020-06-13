@@ -4,7 +4,7 @@ var ObjectId = require('mongodb').ObjectId
 
 
 //Mongo Url
-const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:8000'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:8000'
 
 
 router.get('/', (req, res, next)=>{

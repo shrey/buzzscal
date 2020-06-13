@@ -21,7 +21,7 @@ echo "var ObjectId = require('mongodb').ObjectId" >> $file
 echo "" >> $file
 echo "" >> $file
 echo "//Mongo Url" >> $file
-echo "const MONGO_URI = process.env.MONGO_URI | 'mongodb://localhost:8000'" >> $file
+echo "const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:8000'" >> $file
 echo "" >> $file
 echo "" >> $file
 echo "router.$method('/', (req, res, next)=>{" >> $file
@@ -34,4 +34,5 @@ echo "		" >> $file
 echo "		}" >> $file
 echo "	});" >> $file
 echo "});" >> $file
+echo "" >> $file
 echo "module.exports = router" >> $file
