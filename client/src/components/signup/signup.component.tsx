@@ -68,7 +68,7 @@ export const SignUpComponent: React.FC = () => {
             <CustomTextField
             label = "Password"
             required = {true}
-            name = "password"
+            name = "passwd"
             type = "password"
             value = {signUpDetails.passwd}
             handleChange={handleChange}

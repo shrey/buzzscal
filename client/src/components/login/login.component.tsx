@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {CustomTextField} from '../TextField/TextField.component'
 import {StyledHeader, StyledButton} from './login.styles'
-
+import axios from 'axios'
 export const LoginComponent: React.FC = () => {
     var [loginDetails, setLoginDetails] = useState({
         username: '',
-        password: ''
+        passwd: ''
     })
 
     const handleChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +18,16 @@ export const LoginComponent: React.FC = () => {
     }
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        axios({
+            method: 'post',
+            url: '/user/login',
+            data: loginDetails
+        }).then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log("Error occured", error);
+        })
 
     }
     return(
@@ -35,8 +45,8 @@ export const LoginComponent: React.FC = () => {
                 <CustomTextField
                 label = "Password"
                 handleChange = {handleChange}
-                value = {loginDetails.password}
-                name = "password"
+                value = {loginDetails.passwd}
+                name = "passwd"
                 id = "password_signin"
                 type = "password"/>
                 <StyledButton>Login</StyledButton>
